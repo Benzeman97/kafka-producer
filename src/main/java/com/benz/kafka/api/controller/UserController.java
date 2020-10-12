@@ -1,5 +1,6 @@
 package com.benz.kafka.api.controller;
 
+import com.benz.kafka.api.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -8,19 +9,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/kafka")
 public class UserController {
 
-    private KafkaTemplate<String,String> kafkaTemplate;
+    private KafkaTemplate<String, User> kafkaTemplate;
     final private static String TOPIC="Kafka_Example";
 
     @Autowired
-    public UserController(KafkaTemplate<String,String> kafkaTemplate)
+    public UserController(KafkaTemplate<String,User> kafkaTemplate)
     {
         this.kafkaTemplate=kafkaTemplate;
     }
 
-    @GetMapping("/publish/{msg}")
-    public String publish(@PathVariable("msg") String message)
+    @GetMapping("/publish/{name}")
+    public String publish(@PathVariable("name") String name)
     {
-         kafkaTemplate.send(TOPIC,message);
+        User user=new User(1001,name,12000.00);
+         kafkaTemplate.send(TOPIC,user);
 
          return "published successfully";
     }
