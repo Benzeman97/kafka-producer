@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Configuration
 public class KafkaConfig {
 
-    private ProducerFactory<String, User> producerFactory()
+    private ProducerFactory<String,User> producerFactory()
     {
         Map<String,Object> config=new ConcurrentHashMap<>();
 

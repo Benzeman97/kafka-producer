@@ -14,4 +14,13 @@ public class User {
     private int userId;
     private String userName;
     private double salary;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }

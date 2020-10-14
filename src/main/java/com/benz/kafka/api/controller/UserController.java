@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/kafka")
 public class UserController {
 
-    private KafkaTemplate<String, User> kafkaTemplate;
-    final private static String TOPIC="Kafka_Example";
+    private KafkaTemplate<String,User> kafkaTemplate;
+    final private static String TOPIC="Kafka_Example_Json";
 
     @Autowired
     public UserController(KafkaTemplate<String,User> kafkaTemplate)
@@ -21,7 +21,7 @@ public class UserController {
     @GetMapping("/publish/{name}")
     public String publish(@PathVariable("name") String name)
     {
-        User user=new User(1001,name,12000.00);
+        User user=new User(1001,name,12000.0);
          kafkaTemplate.send(TOPIC,user);
 
          return "published successfully";
